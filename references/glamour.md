@@ -40,6 +40,19 @@ not a rule. Only the requester's own words can forbid glow.
 - Stars: one per 9 px cell with 7% chance, placed at a random point inside the cell (a per-pixel hash
   makes visible rows; don't), brightness 0.35–1 × 0.7, fading out toward the horizon. No twinkle.
 
+### Backdrops: paint them, and put them on depth planes
+- Clouds, water, forests and skylines built from procedural shapes read as blobs, grapes or
+  mushrooms however they're tuned (four failed rounds on Drone Command, 2026-09-24). Use painted art:
+  Midjourney with `--tile` for a seamless loop (`--ar 4:1 --tile --style raw`, subject "isolated on a
+  pure black background"), key the background to alpha, un-mix it from the soft edges, trim any
+  strips at the top and bottom, and check the seam by tiling it twice.
+- Anything behind the play sits on a plane m camera-distances back. When the view widens by z, draw
+  it at `(1 + m) / (z + m)` of its first scale (the land goes by `1/z`), anchored to the horizon and
+  the camera centre. Two layers at different m (e.g. 4 and 1.6) with more haze on the far one give
+  real parallax. Screen-space backdrops (fixed size) look wrong the moment the camera zooms.
+- Keep backdrops opaque and behind the terrain, low enough that hills cut across them; tall and
+  bright enough that their tops clear the hills, or they read as fog in the valleys.
+
 ### Bloom (WebGL)
 - Render the scene into an RGBA8 texture the size of the canvas.
 - Bright pass into half size: `c * smoothstep(0.22, 0.75, max(r,g,b))`.

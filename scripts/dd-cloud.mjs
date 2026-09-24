@@ -1,0 +1,10 @@
+import { chromium } from 'playwright'
+const b = await chromium.launch({ args: ["--use-gl=angle","--use-angle=swiftshader","--enable-unsafe-swiftshader"] })
+const page = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage()
+const errs = []; page.on('pageerror', e => errs.push(e.message)); page.on('console', m => m.type() === 'error' && errs.push(m.text()))
+await page.goto('http://localhost:5240'); await page.waitForTimeout(1500)
+await page.screenshot({ path: '/tmp/ddv/cl-title.png' })
+await page.evaluate(() => { window.__noAutoPause = true; __game.startRun(false); __game.advance(9, 30) })
+await page.screenshot({ path: '/tmp/ddv/cl-wave.png' })
+console.log(JSON.stringify(errs))
+await b.close()
