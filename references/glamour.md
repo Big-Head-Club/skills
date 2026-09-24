@@ -98,6 +98,12 @@ the game:
   desaturated beat on failure; changes ease over about 0.5 s.
 - **One rationed screen effect** on the biggest hit only: a 60–120 ms chromatic split or radial
   shock distortion, off under reduced motion.
+- **Hero objects keep their charm when the camera pulls back.** If the view zooms out over a run,
+  draw the things the player cares about (their cities, units, base) a little larger per zoom step
+  (Drone Command: ×1.1 per step, eased with the camera) and give structures real detail: dark
+  silhouettes with lit windows and roof lights read at any size, thin outlines don't. Compare the
+  first and the last wave side by side; the late game must not look like a lesser game (Daniel,
+  2026-09-24: "looks way better at this zoomed in scale than it does at the zoomed out late game").
 - **Sound that matches the light:** the biggest light event is also the loudest, with the silence
   before it (`juice-kit.md`).
 
