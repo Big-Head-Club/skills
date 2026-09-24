@@ -1,0 +1,18 @@
+import { chromium } from 'playwright'
+const b = await chromium.launch({ args: ["--use-gl=angle","--use-angle=swiftshader","--enable-unsafe-swiftshader"] })
+const page = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage()
+const errs = []; page.on('pageerror', e => errs.push(e.message))
+await page.goto('http://localhost:5240'); await page.waitForTimeout(1000)
+await page.evaluate(() => { localStorage.removeItem("dd.run"); window.__noAutoPause = true; __game.startRun(false); __game.advance(3, 30); let n = 0; while (__game.run.s.phase === "wave" && n++ < 300) __game.fast(20); __game.advance(0.4, 30) })
+// an early click, as an eager player would
+await page.waitForTimeout(300)
+await page.click('#cards .card:nth-child(1)', { force: true })
+const early = await page.evaluate(() => __game.run.s && document.querySelector('#cards .card').classList.contains('picked'))
+await page.waitForTimeout(2000)
+await page.screenshot({ path: '/tmp/ddv/shop6.png' })
+await page.click('#cards .card:nth-child(1)')
+await page.mouse.move(500, 700)
+await page.evaluate(() => __game.advance(0.3, 30))
+await page.screenshot({ path: '/tmp/ddv/placing6.png' })
+console.log(JSON.stringify({ early, errs }))
+await b.close()

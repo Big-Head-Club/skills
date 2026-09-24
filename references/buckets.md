@@ -94,6 +94,15 @@ layout.
 - Upgrades stack visibly or stop being offered: a switch can't be bought twice, a
   maxed upgrade greys out, and every upgrade does something for every unit it can
   target (see bucket 1).
+- A shop: the price on every card, the bank's balance above it, the price in red when
+  you can't afford it, a clear bought state, a visible cap on buys per round (pips), and
+  one primary button to move on. Group kinds in rows (units above, powerups below).
+- One shared shop/choice policy module drives every bot, time-out pick and demo, so a
+  rules change can't leave one of them buying the old way. Retune with bots after any
+  economy change and report the medians.
+- Introduce enemy or threat types gradually on a fixed schedule (a few to start, one
+  more every few rounds), and open with the gentlest ones: check the weakest starting
+  loadout survives round 1 with bots.
 - One vocabulary for the fiction, used everywhere.
 - Undiscovered hands, companions and artifacts show as "?".
 - After the run recap, a celebratory screen shows anything newly unlocked.

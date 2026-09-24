@@ -130,7 +130,10 @@ owner can.
    round to round, so the shots compare.
 2. Pick the three key states for the before/after test (main play mid-action,
    the player's big move landing, the result) and make sure `states.mjs`
-   reaches each one with the effect on screen, not before it lands. Then run
+   reaches each one with the effect on screen, not before it lands. For a
+   game that escalates, add a **late, crowded state** too (the last zoom, the
+   most objects, things lost). Effects that look fine in wave 1 stack into
+   white blobs, slabs and noise late; that is where the owner will look. Then run
    round 0:
 
    ```bash
@@ -200,6 +203,25 @@ failure this skill exists to prevent.
 
 Prove it the way `glamour.md` says: frame-step the big move, run `imgstats`
 r0 against r2 on the gameplay frame, and run the indistinguishable test.
+
+## Owner feedback rules (from live play)
+
+These came from Daniel playing glow-ups mid-run. They apply to every fix, in
+every round:
+
+- **Quiet first.** When the instinct is "make it much more visible" or
+  "unmistakable", stop and assume you're overreacting. Build the quietest cue
+  that works (a ghost, a slow pulse, a snap, a faint glow) and scale up only
+  if the owner says it's still unclear. Rings plus flashes plus labels plus
+  smoke for one event was "ludicrously over the top".
+- **Numbers are exact.** "33% of its current intensity", "50% shorter",
+  "10% then 8, 5, 3": apply exactly that, and say the value you set.
+- **Don't automate the player's main verb** (aim, fire, place) by default.
+  Offer it as a setting, off unless asked. An assist that acts away from
+  where the player is looking reads as broken.
+- **Show it live, then say it's live.** Deploy, fetch the changed asset from
+  the live URL, and only then tell the owner; they reload at once. Tell them
+  to hard-reload when styles or scripts changed.
 
 ## 5. Rounds
 

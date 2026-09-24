@@ -53,6 +53,20 @@ not a rule. Only the requester's own words can forbid glow.
 - Keep backdrops opaque and behind the terrain, low enough that hills cut across them; tall and
   bright enough that their tops clear the hills, or they read as fog in the valleys.
 
+### Pixel-art backdrops
+- Pixelate the **source** once (box-average it down so the loop stays seamless, draw with nearest
+  filtering), then scroll the pixelated image. A pixelation filter in screen space over a moving image
+  makes blocks crawl and change size.
+- Each source pixel covers a **whole number** of screen pixels, and the image moves in **whole-pixel
+  steps**; otherwise blocks come out 3 or 4 pixels wide and jitter as they drift.
+- Posterize to a few tones and cut alpha hard (no soft fringe), then lay a haze of the sky's colour over
+  it so the backdrop sits behind the play.
+- No flat slabs: below a backdrop's base, fill with more of the same (offset rows, hazier lower down),
+  not a single-colour band. Tie the backdrop's top to the terrain in view (just over the highest
+  peak), recomputed every frame so it holds at every zoom.
+- A sky glow over a backdrop (twilight, city glow) wants to be faint: Daniel took one to a third of
+  its first strength.
+
 ### Bloom (WebGL)
 - Render the scene into an RGBA8 texture the size of the canvas.
 - Bright pass into half size: `c * smoothstep(0.22, 0.75, max(r,g,b))`.
@@ -87,6 +101,11 @@ not a rule. Only the requester's own words can forbid glow.
 - Glow halos: heads 3.4 × size at alpha 0.32, units 2.4 × at 0.16, structures a faint wide disc at
   0.07 that brightens when hit.
 
+### Soft particles stack
+- Many soft, bright particles in one place add up to a solid white blob once bloom runs (a smoking
+  ruin at a late wave looked "hideous"). Give lingering emitters a low per-particle alpha, a low
+  rate and a mid-grey or dim colour, and check them at the crowded late state.
+
 ### Performance
 - Budget on a mid phone: 60 fps, ≤ 8 ms per frame. Bloom at half and quarter size costs about 7
   full-screen passes; if a phone stutters, drop to quarter-only or skip the 2× pass first.
@@ -111,9 +130,13 @@ the game:
   desaturated beat on failure; changes ease over about 0.5 s.
 - **One rationed screen effect** on the biggest hit only: a 60–120 ms chromatic split or radial
   shock distortion, off under reduced motion.
+- **World-anchored overlays follow the camera.** Anything drawn from where something started (a path
+  from its spawn point, a label at a map edge) gets stranded mid-screen after a zoom; re-anchor it to
+  the screen edge or the current view.
 - **Hero objects keep their charm when the camera pulls back.** If the view zooms out over a run,
   draw the things the player cares about (their cities, units, base) a little larger per zoom step
-  (Drone Command: ×1.1 per step, eased with the camera) and give structures real detail: dark
+  (Drone Command: +10% on the first step, then 8, 5, 3, 2, 1, 1 and no more, eased with the camera;
+  a flat +10% per step was far too big by the end) and give structures real detail: dark
   silhouettes with lit windows and roof lights read at any size, thin outlines don't. Compare the
   first and the last wave side by side; the late game must not look like a lesser game (Daniel,
   2026-09-24: "looks way better at this zoomed in scale than it does at the zoomed out late game").

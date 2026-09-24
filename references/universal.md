@@ -99,6 +99,12 @@ where they help a critic. Cite items by number (U12).
 - U31. A number that changes counts or pops; it never jumps silently.
 - U32. Relative times ("5 min ago") update on their own.
 
+- U29a. Placing a thing in the world (a building, a unit, a card on a board): the cursor
+  becomes a faint ghost of it, legal spots pulse gently, the ghost snaps onto a spot within
+  about 60 px, and a click there commits and pays. On touch: press shows the ghost at the
+  finger, drag moves it, release commits, a drag off lets go. Never "click the card, then
+  guess where to click".
+
 ## D. Motion
 
 - U33. Still while the user thinks, moving when the user acts. No ambient
