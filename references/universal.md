@@ -183,6 +183,29 @@ where they help a critic. Cite items by number (U12).
 - U57. Sound only where it carries meaning. Haptics go on reward and on hold
   confirmations, never on every tap.
 
+## J. Results, rewards and reveals
+
+- U61. A result screen shows one thing at a time, in beats: the number, one
+  line of what happened, a counter for what was earned, then each new thing
+  alone in the middle of the screen (a glyph, a name, a few words, dots for
+  how many are coming), then the buttons. A tap anywhere moves it on; a timer
+  moves it on for someone who does not tap. Nothing arrives all at once.
+- U62. Line items, breakdowns, track bars and dials start hidden. A "…" or
+  a closed menu opens them; the Hangar (the meta screen) holds the tracks.
+  If a number is essential, it is one number, not a list.
+- U63. A reveal is not a button. A new item stands alone in a panel with no
+  button chrome, no hover state and nothing to click; the grid of cards that
+  looked clickable and did nothing was the complaint. Buttons come after the
+  reveals, and only the ones that act.
+- U64. Chrome appears when it means something. A meta menu (Hangar, Spend)
+  stays hidden until the first time it has anything in it; a track bar that
+  reads "complete" is cut.
+- U65. Anything the player times fires from a fixed, visible emplacement with
+  a visible state, never from "the nearest thing standing".
+- U66. When a block of code is cut, grep for boot calls inside it (a
+  `resize()` that lived at the end of a deleted feature block left every
+  canvas black; the error was a `RangeError` far from the cause).
+
 ## I. Trust and hygiene
 
 - U58. Clean console, no broken links, a correct `<title>`, og and canonical

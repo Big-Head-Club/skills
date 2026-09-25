@@ -222,6 +222,28 @@ every round:
 - **Show it live, then say it's live.** Deploy, fetch the changed asset from
   the live URL, and only then tell the owner; they reload at once. Tell them
   to hard-reload when styles or scripts changed.
+- **A result screen is a sequence, not a report.** Daniel on a death screen
+  that listed every line item and eleven unlock cards at once: "Entirely too
+  much data here. this should be legible at a glance via symbols or charts",
+  "if it's essential, we need to start it hidden in a closed menu", "they
+  look like buttons but I can't click them", "if those are things I unlocked,
+  there should be a staged unlocks experience", "please don't just throw shit
+  at me, try to build a proper game up to AAA standards". The pattern that
+  passed is `universal.md` section J: one number, one line, one counter, then
+  each new thing alone in the middle of the screen, then the buttons, with the
+  line items behind a "…".
+- **A few plain words per card.** "too many words, most of them don't make
+  sense to me". A card line is what the thing does for the player, in under
+  ten everyday words ("Roll the shop again"), never the rule that governs it
+  ("After waves 1, 3, 6, 9 and 12: two cards, take one or pass for 40").
+- **What the player times must fire from a fixed, visible place.** The laser
+  fired "from the start city, or the nearest one standing"; Daniel: "I need
+  to know which city the laser is coming from to time hits". Give every timed
+  action its own emplacement with a visible state (a barrel on the reticle,
+  brightness for charge), and never move it.
+- **Chrome the owner did not ask for goes when they say so.** Share, Video and
+  Credits went in one line ("also get rid of share and video and credits").
+  Ask once, early, whether export and credit screens earn their place.
 
 ## 5. Rounds
 
