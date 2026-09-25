@@ -31,6 +31,22 @@ The track bars and the luck dial moved to the meta screen (the Hangar). The luck
 A run that opens many cards at once (a strong first run fires every first-clear card) is many
 taps. If the owner minds, hand out at most two or three per death and hold the rest.
 
+## The meta shows in play
+
+"All this stuff about deeds and fates and curses and pity is totally invisible to me in the game."
+What shipped, all quiet: a small dial next to the bank (the luck roll, needle at the score, colour
+by tier); a chip per card in force under the bank with the waves it has left (a cleared setback
+turns green); the citation furthest along under each wave clear ("Untouched 3 / 5"); pips in the
+shop header for rolls since the top tier last showed, gold when the odds start to climb; the
+numbers themselves (roll, prices, odds, pool) one line in the pause panel.
+
+## The words fit the fiction
+
+"Omen, curse, fate, these are all high fantasy terms. This is a war game." The ids stay in code
+and docs; every string the player sees changes: Fate → Supply (Cut off, Strained, Steady,
+Reinforced, Priority), Omens → Dispatches with Support / Gambit / Setback on the card, Frontier
+→ Front, deeds → citations, nodes named for what they do (Quartermaster, Salvage crew, Backorder).
+
 ## Cards say what they do, in a few words
 
 "too many words, most of them don't make sense to me". A card line is what the thing does for the
@@ -38,12 +54,25 @@ player in under ten everyday words: "Shop before the first wave", "Roll the shop
 take one more hit". Never the rule ("After waves 1, 3, 6, 9 and 12: two cards, take one or pass
 for 40"). Item cards keep the game's own name and line.
 
+## The end screen, final form
+
+Three replays were cut before this. The field shows only the rockets that damaged a city, in red,
+drawn at once, each with a short tail that fades toward where it came from. A big red YOU DIED lands
+first (in from slightly too large, a soft glow, then still), then the number, the counter, the
+unlock cards one at a time, the buttons. Ending a run by hand skips the word.
+
 ## The shop
 
 Bases over powerups, prices on each card, a thin stripe on the left edge for a tier above common
 (uncommon cool, rare gold). Reroll sits left of Go once the profile has it, priced on the button
 ("Reroll 60"), the first one free. Locked slots are not shown; a small pool just shows fewer cards.
 Run 1's shops are fixed so no first-timer sees a shop with no damage in it.
+
+**Undo** sits left of Reroll whenever this shop has a purchase to reverse, with the refund on it;
+Z or Backspace too. It is a logged input: each buy records what it did and undo reverses that one
+step. The shop never closes itself; it waits for Go. A base sells back by a tap on it and a tap on
+its price (the Scrapyard node). Anything the player times, like the laser, fires from a fixed
+visible emplacement.
 
 ## Gambles
 

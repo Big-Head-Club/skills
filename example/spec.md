@@ -49,6 +49,38 @@ changed these numbers. The code is the truth; this list says where and why.
   recharges only during a wave, base prices climb 25% per copy standing, the Mint is 650 for 90 a
   wave.
 
+## 0b. The second wave of content (2026-09-25)
+
+Daniel: "add more unlocks, more progressions, more powerups, more stuff", "the meta progress happens
+way too fast", new drone types (a gunship way up high, a reaper, an eye in the sky that widens every
+drone's reach under it), "add some boss rockets", "add more depth, add more richness".
+
+- **Pacing.** One ladder step per death, at most two wave steps per run (the rest are held and
+  shown as "next run" in the Hangar), the ladder now runs to death 23; a fragment every second
+  counted death and every 750 kills; a Blueprint costs 3 + the number already bought; a deed's item
+  is never a Blueprint. Casual bots open two or three cards a run and reach the Reaper around run
+  16; strong bots still have items locked after 14 runs.
+- **Drones.** Gunship (orbits at altitude, rains shots, rare, 520), Reaper (homing missiles at the
+  toughest rocket, rare, 480), Eye (every pad within 70 reaches 30% further, uncommon, 450), Lure
+  (rockets within 30 turn for it and blow up on it, uncommon, 380). Stations hold under the top of
+  the view.
+- **Powerups.** Hive (+2 drones), Armour piercing (triple to Brutes), Beacon (this pad's kills pay
+  double), Warden's oath (its city shrugs off the first blast each wave), Chain reactor (laser kills
+  blast twice as big), Prism (three shells in a fan), Afterburner (a shell kill refunds a second, up
+  to three), and three run-wide ones: Bounty board, Ledger, Dead man's switch.
+- **Omens.** Scavenger, Reinforcements, Gale, Fog, Blackout, Volley.
+- **Deeds** with live counters in the Hangar: Untouched (5 clean waves in a row → Bounty board),
+  Banker (3 Mints → Ledger), Sentinel (a Warden's city untouched 5 waves → Oath), Swarm lord (1,500
+  kills → Hive), Gunner (40 laser kills in a run → Chain reactor), Marksman (200 laser kills →
+  Prism), Survivor (12 deaths → Dead man's switch), Brute force (20 Brutes → Armour piercing),
+  Giant killer (5 bosses → Lure).
+- **Tree.** Plating (2 ranks, 150/300), Scrapyard (sell a base for half), Long memory (an unbought
+  item comes back 20% off), Deep pockets (pass pays 100), Stake (+40 start money a rank).
+- **Bosses.** Wave 5 Warhead (14 HP, blast ×3, 3 city damage), wave 10 Hydra (18 HP, splits into
+  four Needles), wave 15 Titan (40 HP, sheds decoys, 4 city damage). Each comes a third of the way
+  into its wave at the start city, wears its health as an arc, pays 60/80/150 and 15 Wreckage.
+- **Threats** past the win: +10% rockets a level, then faster rockets, dearer shops, one less city HP.
+
 ## 1. The first run
 
 **Starting kit.** One city (3 HP), one Hornet pad beside it holding **one drone** (the bible: "one

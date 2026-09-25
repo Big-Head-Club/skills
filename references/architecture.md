@@ -81,6 +81,22 @@ Applies the payout, moves every counter, marks the seed paid, ticks deaths and f
 death qualifies, and walks the ladder handing out every card whose trigger is now met. Returns the
 cards it opened, in order, for the reveal sequence.
 
+## Inputs added on the second day
+
+`{k:"undo"}` reverses the last buy of the current shop from a record each buy leaves
+(`offer.history`); `{k:"sell", target}` sells a base for half; both are logged, so a reload or
+replay reproduces them. Mods carry `src` (the card that made them) so the HUD can list what is in
+force; `activeOmens(s)` returns each with the waves it has left.
+
+## Units that are not drones
+
+A ground unit (the Flak battery) has `cap: 0` and `ground: true`; the launcher loop fires it every
+reload at where the nearest rocket in reach will be, and sweeps a barrage when nothing is in reach.
+A station (Gunship, Eye, Lure) holds an altitude capped to the view. The Eye sets `L.boost` on every
+pad within its circle each tick, and `inReach` multiplies by it. The Lure changes targeting at
+spawn: a rocket launched at a city within its reach is aimed at the Lure from the start, never
+turned in the air, and blows up on it as the Lure's kill.
+
 ## The luck roll
 
 `rollFate(profile)` is keyed to counters a surrender cannot move (deaths, wins, lifetime currency,

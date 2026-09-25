@@ -28,6 +28,25 @@ What moved the cadence, in order of effect:
 6. **Pre-wave money.** The pre-wave shop card comes with enough for a switch (a behaviour toggle),
    not a unit. War chest adds +20 a rank so a unit before wave 1 needs four ranks.
 
+## Pacing rules that held (2026-09-25)
+
+- One ladder step per death; at most two wave steps per run, the rest held. Ladder to death 23.
+- A fragment every second counted death and every 750 kills; a Blueprint costs 3 + the number
+  already bought; a citation's item costs double; fragments become 10 Wreckage each only when
+  nothing is left to open.
+- Citations: five tiers (×2 to ×2.5 apart); level 1 opens the item, later levels pay 20 × level.
+  Mastery per unit type at 100 / 300 / 800 / 2,000 / 5,000 lifetime kills, 15 × level each.
+  Rank past the ladder: a level every second death, a fragment each.
+- No cap: bosses every fifth wave cycling three types, HP ×1.5 each cycle; cities to wave 19; a
+  first clear past wave 15 grows by one a wave.
+- Sinks a maxed profile still wants: Garrison 600 (a second pad from the start), Overwatch 500 /
+  900 (laser charges), Armoury 200 / 400 / 800 (a starting powerup by tier), Provisions 150-560
+  (+10 city income a rank), Reserve (+15 wave bonus, ×1.4 a rank, 20 ranks), Stake (+40 start
+  money, ×1.35 a rank, 30 ranks). A strong career buying everything earned 4,600 over 14 runs and
+  ended with 21 in hand.
+- Laser recharge is a family the owner wants more of: Quicker strike, Capacitor (common, in the
+  starting pool), Hot swap, Overcharge, Afterburner, all rolling at 1.6× weight, recharge floor 35%.
+
 ## Drone Command's numbers (v1, 2026-09-24), as a starting point
 
 **First run.** One city (3 HP), one Hornet pad holding one drone, 50 money, Sidearm laser (radius

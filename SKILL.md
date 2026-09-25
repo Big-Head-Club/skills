@@ -124,8 +124,45 @@ that shaped it. Keep the game's own UI rules (`~/.claude/CLAUDE.md`, the repo's 
 
 Check `pitfalls.md` item by item; each one was found in a build that had passed its tests.
 
-## 6. Ship and report
+## 6. The second day: what the owner asks for once they play
 
-Commit on the owner's branch, push, deploy with the repo's command. Report in plain sentences:
+Every one of these came within a day of the first ship. Build them in from the start next time.
+
+- **More of everything, slower.** "Add more unlocks, more progressions, more powerups, more stuff"
+  and, in the same breath, "the meta progress happens way too fast, I've got almost everything
+  unlocked". The fix is structural, not a price: one ladder step per death, at most two wave cards
+  per run with the rest held (shown as "next run"), a ladder that runs to death 23, fragments every
+  second death. A strong player must still have things locked after fifteen runs.
+- **Levels on everything.** "I should always have made-up goals to strive toward, even if it
+  doesn't unlock something." Five tiers per citation, mastery levels per unit type from lifetime
+  kills, Rank levels past the ladder, and every level a card on the end screen. Bars never read
+  "complete": they name the next level.
+- **No cap.** "I should go until I die, always." A win wave is a rug pull; bosses recur every fifth
+  wave and toughen, cities keep arriving, first clears keep paying (cooled past the old cap).
+- **Every death counts.** Any death after clearing a wave moves Rank; the anti-idle gate goes on
+  the ladder's cards (death N's cards need a best wave of min(N, 3)), never on the count.
+- **The meta must show in play.** "All this stuff about deeds and fates and curses and pity is
+  totally invisible to me in the game." A dial in the HUD, a chip per card in force with waves
+  left, the nearest citation under the wave clear, pity pips in the shop. `references/ui.md`.
+- **The words must fit the fiction.** "Omen, curse, fate, these are all high fantasy terms. This is
+  a war game." Rename before the owner sees them: Supply, Dispatches, Support / Gambit / Setback.
+- **Weak items get named.** "Spread out and Lowest first and Bigger blast are all unappealing." Give
+  every switch a little power and weight the families the owner wants (range, recharge) up in the
+  shop. Expect a request for a whole family ("more powerups that let me charge the laser faster").
+- **A maxed profile with money is a bug report.** Deep sinks (a second pad from the start, extra
+  charges, a starting powerup, income), a node that climbs thirty ranks, fragments that can open
+  anything and turn into currency only when nothing is left, pay that cools at depth.
+- **Reset everyone.** Profiles live in the browser; a version bump is the reset. Say that it's gone
+  for good.
+
+Use the bots for each mechanic as it lands (a script that places one Lure and counts what it
+kills), the career bot for pacing, and a browser probe that clicks around every target and reports
+any rejection while the target was lit (that found a shake bug two days of play had not named).
+
+## 7. Ship and report
+
+Commit on the owner's branch, push, deploy with the repo's command, after every fix, and tell the
+owner to hard-reload (a resumed run replays under the cached script, and they will report the old
+behaviour as still broken). Report in plain sentences:
 what is live, what the bots say about the cadence (run by run), what was cut and why, and the one
 open design gap. Give the owner a way to start from run 1 (a fresh profile).

@@ -69,6 +69,42 @@ Each of these was real in Drone Command. Check every one before shipping.
 - **The event batch.** Client handlers that scan the batch for "was there also an X" work only
   while events happen to flush together. Handle each event.
 
+## The second day (2026-09-25)
+
+- **A win wave in an endless game.** Clearing it ended the run mid-momentum; the owner called it a
+  rug pull. If the fiction is "go until you die", never end a run on a clear.
+- **Cards fire all at once.** A strong first run cleared waves 3-9 and opened ten cards in one
+  screen. Cap wave cards per run and hold the rest.
+- **A death that opens nothing is fine; a death that doesn't count is not.** Gating the count
+  made some deaths invisible. Gate the cards, count every death.
+- **Fragments with nothing to open.** A citation's item was excluded from Blueprints, so fragments
+  piled up. Let them open anything at a premium, and convert only when nothing at all is left.
+- **Kill credit through a proxy.** Flak clouds credited the strike whatever laid them; a rocket
+  that blew up on the Lure was a "landing". Every kill path needs an owner: a cloud carries its
+  layer, a lured rocket credits the Lure's pad, and the balloon it takes is not a loss.
+- **A mid-flight turn looks broken.** The Lure pulled rockets that were already flying; they
+  turned sharply. Anything that redirects a threat does it at launch, so the path is straight.
+- **A station off the top of the view.** Altitudes are relative to the pad; a hilltop pad put the
+  gunship above the frame. Cap hover heights to the view.
+- **A city that is all rubble but still alive.** Damage art keyed to a fixed hit count broke when
+  HP grew. Key it to the share of HP lost and keep a third standing while it lives.
+- **A shake that outlives its animation.** The rejection class was never removed; a hidden then
+  shown element replays every animation it wears, so every legit buy shook the row. Remove
+  feedback classes at animationend and in every rebuild.
+- **The shop that closes itself.** Auto-closing after the last affordable buy took away undo and
+  a look around. The shop stays open until Go.
+- **Overlays that outlive the run.** Badges, popups, hints and chips stayed over the title after
+  Home. Home clears everything a run put on screen.
+- **A ground unit that idles.** With nothing in reach it waited; the owner wants it to spam. A
+  barrage sweep when there is no target.
+- **The end replay, three times.** A time-compressed replay stepped and dragged; a top-down wipe
+  invented paths from the wrong view; a kill-by-kill sequence was still "sick of it". What shipped:
+  no replay, only the rockets that hurt a city, drawn at once in red, and a big red YOU DIED. Do not
+  draw what the player did not see: a short fading tail, never a run-back along a guessed line.
+- **Trails sampled too coarsely** read as sawtooth; sample twice as often.
+- **The shader's type table** was hand-numbered; adding types shifted every id. Compute it from the
+  lists.
+
 ## Feel
 
 - **A dead first shop.** The pre-wave shop at 60 money with the cheapest item at 150 is a screen

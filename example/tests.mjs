@@ -3,7 +3,7 @@ import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import { createRun, applyInput, step, replay, makeWorld, bandSpan, isRevealed, canUpgrade, launcherStats, shopFor, validInput, modK } from "../public/src/sim.js"
 import { SPEC, WORLD, viewWidth, DRONE_ORDER, UPGRADES, OMENS, COUNTERS, ROCKET_DEBUT } from "../public/src/config.js"
-import { newProfile, runConfig, fullRun, payout, advance, LADDER, CARDS, TREE, rollFate, fateTier } from "../public/src/meta.js"
+import { newProfile, runConfig, fullRun, payout, advance, LADDER, CARDS, TREE, treeRanks, treeCost, rollFate, fateTier } from "../public/src/meta.js"
 import { nameless } from "../public/src/guide.js"
 import { play } from "../tools/bot.mjs"
 import { career } from "../tools/meta.mjs"
@@ -110,7 +110,7 @@ test("a casual career lengthens: run 1 dies early, runs 6-8 go further, and the 
     first.push(rows[0].waves)
     late.push(...rows.slice(5).map((r) => r.waves))
     assert.ok(p.deaths >= 6, `profile ${k}: ${p.deaths} deaths`)
-    assert.ok(p.unlocked.includes("prewave") && p.unlocked.includes("shop2x2"), `profile ${k} missed the first cards`)
+    assert.ok(p.unlocked.includes("prewave") && p.unlocked.includes("kite"), `profile ${k} missed the first cards`)
     assert.ok(p.lifetimeW > 100, `profile ${k} earned ${p.lifetimeW} W`)
   }
   const med = (a) => a.slice().sort((x, y) => x - y)[a.length >> 1]
@@ -124,7 +124,7 @@ test("a casual career lengthens: run 1 dies early, runs 6-8 go further, and the 
 
 test("the shop: rank slots and tiers, no tier the profile lacks, a counter before every debut", () => {
   const p = newProfile()
-  for (const l of LADDER) if (l.at.death && l.at.death <= 4) p.unlocked.push(...l.cards)
+  for (const l of LADDER) if (l.at.death && l.at.death <= 13) p.unlocked.push(...l.cards)
   p.unlocked.push("mint", "ram", "charge", "flak", "tierR")
   const run = runConfig(p, "shop-1")
   run.fated = false; run.pool = { launchers: DRONE_ORDER.slice(), upgrades: Object.keys(UPGRADES), mint: true }
@@ -218,7 +218,7 @@ test("fate: the roll's tiers land where the spec says, and Fate shapes prices an
   assert.ok(pct("forsaken") > 0.025 && pct("forsaken") < 0.07, `forsaken ${pct("forsaken")}`)
   assert.ok(pct("touched") > 0.025 && pct("touched") < 0.07, `touched ${pct("touched")}`)
   assert.ok(pct("unsteady") > 0.35 && pct("unsteady") < 0.52, `unsteady ${pct("unsteady")}`)
-  for (const l of LADDER) if (l.at.death && l.at.death <= 5) p.unlocked.push(...l.cards)
+  for (const l of LADDER) if (l.at.death && l.at.death <= 6) p.unlocked.push(...l.cards)
   let lo = null, hi = null
   for (let i = 0; i < 400 && !(lo && hi); i++) { p.lifetimeW = i; const r = runConfig(p, "g" + i); if (r.tier === "forsaken") lo = r; if (r.tier === "touched") hi = r }
   assert.ok(lo && hi)
@@ -263,19 +263,24 @@ test("wreckage: first clears pay most, a surrender pays its lines but is no deat
   while (s3.phase === "wave") step(s3)
   s3.cities[0].hp = 1; applyInput(s3, { k: "done" })
   while (s3.phase === "wave") step(s3)
-  if (s3.phase === "over") { const pay3 = payout(idle, s3); assert.ok(!pay3.qualifies || s3.wave >= 3) }
+  if (s3.phase === "over") {
+    // the death counts (every death moves the meta), but death 3's cards need a best wave of 3
+    const pay3 = payout(idle, s3); assert.ok(pay3.qualifies)
+    const opened = advance(idle, s3, pay3); assert.equal(idle.deaths, 3)
+    if (idle.best < 3) assert.ok(!opened.includes("shop2x2"), "an idle death opened a ladder card")
+  }
 })
 
 test("new cities arrive before the waves the spec names, and clearing the win wave ends the run", () => {
   const { s } = play("cities-1", "strong")
   for (const c of s.cities.slice(1)) assert.ok(SPEC.newCityWaves.includes(c.wave))
-  assert.ok(s.cities.length <= 4)
+  assert.ok(s.cities.length <= 6)
   const p = newProfile(); p.tree.swarm = 5; p.tree.chest = 4
   for (const l of LADDER) p.unlocked.push(...l.cards)
   const run = runConfig(p, "win-1"); run.pool = { launchers: DRONE_ORDER.slice(), upgrades: Object.keys(UPGRADES), mint: true }; run.fated = false
   const { s: w } = play("win-1", "strong", { run })
-  assert.ok(w.wavesDone <= SPEC.winWave)
-  if (w.wavesDone === SPEC.winWave) assert.equal(w.result.won, true)
+  assert.ok(w.wavesDone >= 8, `a full profile's strong bot cleared ${w.wavesDone}`)
+  assert.equal(w.result.won, false) // no cap: the run goes until the last city falls
 })
 
 test("strikes and drone shots never hurt drones; the strike only recharges in a wave", () => {
@@ -292,6 +297,26 @@ test("strikes and drone shots never hurt drones; the strike only recharges in a 
   const ready = s.strike.ready, t = s.strike.t
   for (let i = 0; i < 600; i++) step(s)
   assert.equal(s.strike.ready, ready); assert.equal(s.strike.t, t)
+})
+
+test("undo reverses the last buy of a shop: money, pad, drones, powerup counts", () => {
+  const s = createRun("undo-1")
+  applyInput(s, { k: "go" })
+  s.cities[0].hp = 99
+  while (s.phase !== "breather") step(s)
+  s.money = 5000
+  const iL = s.offer.items.findIndex((x) => x.kind === "launcher"), iU = s.offer.items.findIndex((x) => x.kind === "upgrade" && UPGRADES[x.id].to === "launcher")
+  const pad = s.pads.find((p) => p.launcher == null && isRevealed(s, p.x))
+  const before = { money: s.money, n: s.launchers.length, ups: { ...s.launchers[0].ups } }
+  assert.equal(validInput(s, { k: "undo" }), false)
+  assert.ok(applyInput(s, { k: "buy", i: iL, pad: pad.id }))
+  assert.ok(applyInput(s, { k: "buy", i: iU, target: s.launchers[0].id }))
+  assert.ok(applyInput(s, { k: "undo" }))
+  assert.deepEqual(s.launchers[0].ups, before.ups)
+  assert.ok(applyInput(s, { k: "undo" }))
+  assert.equal(s.money, before.money); assert.equal(s.launchers.length, before.n); assert.equal(s.pads[pad.id].launcher, null)
+  assert.equal(validInput(s, { k: "undo" }), false)
+  assert.ok(applyInput(s, { k: "buy", i: iL, pad: pad.id }))
 })
 
 test("a launcher can only go on a free, revealed pad", () => {
@@ -311,16 +336,18 @@ test("a launcher can only go on a free, revealed pad", () => {
 test("everything has a name and a line in the field guide, and every ladder card is described", () => {
   assert.deepEqual(nameless(), [])
   for (const k of Object.keys(UPGRADES)) assert.ok(UPGRADES[k].to)
-  assert.equal(DRONE_ORDER.length, 6)
+  assert.equal(DRONE_ORDER.length, 11)
   for (const l of LADDER) for (const c of l.cards) assert.ok(CARDS[c], `no card ${c}`)
-  for (const id in TREE) assert.ok(TREE[id].costs.length >= 1)
+  for (const id in TREE) assert.ok(treeRanks(id) >= 1 && treeCost(newProfile(), id) > 0, `${id} has no first price`)
 })
 
 test("switch upgrades go on a launcher once; the rest stack; Heavier shots is a real step on a Hornet", () => {
   const L = { type: "picket", ups: {} }
   for (const id of Object.keys(UPGRADES).filter((k) => UPGRADES[k].to === "launcher")) {
     L.ups = {}
+    L.type = UPGRADES[id].only || "picket" // a type-bound switch (Warden's oath) goes on its type only
     assert.ok(canUpgrade(L, id), `${id} should apply the first time`)
+    if (UPGRADES[id].only) assert.ok(!canUpgrade({ type: "picket", ups: {} }, id), `${id} must refuse another type`)
     L.ups[id] = 1
     assert.equal(canUpgrade(L, id), !UPGRADES[id].once, `${id}: a second copy must ${UPGRADES[id].once ? "be refused" : "stack"}`)
   }
