@@ -139,8 +139,12 @@ Every one of these came within a day of the first ship. Build them in from the s
   "complete": they name the next level.
 - **No cap.** "I should go until I die, always." A win wave is a rug pull; bosses recur every fifth
   wave and toughen, cities keep arriving, first clears keep paying (cooled past the old cap).
-- **Every death counts.** Any death after clearing a wave moves Rank; the anti-idle gate goes on
-  the ladder's cards (death N's cards need a best wave of min(N, 3)), never on the count.
+- **Never reward death.** The first Rank track counted deaths; the owner read "Every death
+  counts" in the Hangar and rejected it outright: "we shouldn't be directly rewarding death at
+  all. we should be rewarding defense successfully executed." Rank now moves on rockets shot down
+  over all runs (the ladder's steps sit where the death steps did: ~75 kills a run for a casual
+  career), blueprint pieces come every 125, and an idle run opens nothing because it shoots
+  nothing. Deaths stay a counter for the luck roll and history, never a trigger.
 - **The meta must show in play.** "All this stuff about deeds and fates and curses and pity is
   totally invisible to me in the game." A dial in the HUD, a chip per card in force with waves
   left, the nearest citation under the wave clear, pity pips in the shop. `references/ui.md`.
@@ -154,10 +158,28 @@ Every one of these came within a day of the first ship. Build them in from the s
   anything and turn into currency only when nothing is left, pay that cools at depth.
 - **Reset everyone.** Profiles live in the browser; a version bump is the reset. Say that it's gone
   for good.
+- **A big threat's reach must be visible.** "A boss that lands takes every city" ended a run from
+  one hit on one city; the owner: "it can't magically reach over." Either the blast is drawn wide
+  enough to touch every city it takes (a nuke ring the width of the field) or it takes only the
+  city it hit.
+- **Every sentence in the meta screen is read by a stranger.** "Blueprints are fragments. You get
+  one every second counted death..." and a Swarm bar that restated the money in hand drew "am I
+  having a stroke?". Run the legibility audit (below) after every copy change; a card name must
+  say what it is ("Widest laser", never "Command laser"); a track's note says what moves it, what
+  it opens next, and who chooses ("you pick which").
 
 Use the bots for each mechanic as it lands (a script that places one Lure and counts what it
 kills), the career bot for pacing, and a browser probe that clicks around every target and reports
 any rejection while the target was lit (that found a shake bug two days of play had not named).
+
+**The legibility audit** (`example/legible.mjs`): a script that drives every screen through the
+dev hook and the real buttons, lists every visible element (own text, or a control or drawing with
+none, skipping anything under a painted panel), and asks Jev (TypeSafe's System One model: typed
+scores, no prose, a fraction of a cent a question) how well a first-time visitor who knows only one
+sentence about the game could tell what the element is, what it does, and what it connects to.
+Flag anything under 2 of 3. Read the worst first; the numbers with no name (pad badges, tally
+amounts, a bank total) and the meta screen's sentences are where it bites. Run it after every copy
+change, and before showing the owner.
 
 ## 7. Ship and report
 

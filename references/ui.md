@@ -89,6 +89,17 @@ one line and the step per rank ("+1 on a Hornet a rank"), a buy button showing t
 every item as a tile: unlocked ones by icon and name (a "?" after the name until bought once),
 locked ones a "?" that three fragments open. The item grid waits for its own card.
 
+## The meta screen's sentences (2026-09-28)
+
+Every note under a track is read by someone who has not read the code. What failed: "Blueprints
+are fragments. You get one every second counted death and every 750 kills; three open any ? in
+the grid below (a citation's item costs double). The count rises by one each time you use it."
+and a Swarm bar reading "80 of 80" next to a buy button for 80. What passed: three bars, one
+sentence each. "Rockets down: 700 shot down over all runs. 20 more opens Eye." "Best wave: Your
+best is wave 6. Clear wave 7 to open Rare finds." "Blueprint pieces: 4 in hand. 3 open any ?
+below; you pick which. One more every 125 rockets down." A locked tile carries its cost ("6
+pieces"). Nothing restates the money in hand.
+
 ## Chrome appears when it means something
 
 The Hangar button, the Spend button, the reroll button, the luck toast at launch: each is hidden
