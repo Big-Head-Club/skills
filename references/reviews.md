@@ -59,3 +59,17 @@ before shipping. The refuters are worth reading too: they correct the finders' n
 `example/careers.mjs` after every change: run-1 cadence, medians per run for casual and strong
 policies, and the replay check on profile 0 (compare money, pads, mods, picks and stats, not just
 the tick). The random bot rerolls when it can so the reroll path has replay coverage.
+
+## The legibility audit (2026-09-28)
+
+`example/legible.mjs`. Every visible element on every screen, judged by Jev as a stranger. The
+state Jev sees: one sentence about the game, the screen's name, the element's shape and text,
+the text around it, and everything else readable on the screen. Four questions: is (a button, a
+label, a count, a meter), does, links (what it counts, opens, costs), jargon (yes/no), plus a
+kind. Scores 0-3; flag under 2. What it found on the first run: the Hangar's blueprint sentence
+(1.4 across), "Command laser", pad badges "5 −2" (kills and losses, no name), tally lines "First
+decoy" and "Wave 1 again", the pause line of raw numbers, a bar that restated the bank. What it
+does not do: write the fix (Jev does not write), or see drawings (a canvas is judged by its label).
+It found two tool bugs of its own on the way: elements under a panel counted as visible until
+the collector checked what `elementFromPoint` hit and whether that thing paints a background, and
+a shop driven by the dev hook never closed because only the Go button hides the overlay.
