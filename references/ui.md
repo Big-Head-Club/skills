@@ -100,6 +100,18 @@ best is wave 6. Clear wave 7 to open Rare finds." "Blueprint pieces: 4 in hand. 
 below; you pick which. One more every 125 rockets down." A locked tile carries its cost ("6
 pieces"). Nothing restates the money in hand.
 
+## The shop header (2026-09-28)
+
+Under the bank, one dim line says what the next wave brings, in words, counts by type and a boss
+by name. The script is deterministic, so it is exact. "It affects what I buy."
+
+## The result screen's chrome (2026-09-28)
+
+Hidden at the start of every sequence, shown at its last step; every button refuses clicks until
+then. In landscape the buttons sit in the bottom corner, clear of the word across the sky; the two
+small buttons under Launch share its width. The counter reads "N Shop" when something is
+affordable, "M more to shop" otherwise, and re-settles after every Hangar purchase.
+
 ## Chrome appears when it means something
 
 The Hangar button, the Spend button, the reroll button, the luck toast at launch: each is hidden

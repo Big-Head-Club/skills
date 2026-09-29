@@ -105,6 +105,26 @@ Each of these was real in Drone Command. Check every one before shipping.
 - **The shader's type table** was hand-numbered; adding types shifted every id. Compute it from the
   lists.
 
+## The third day (2026-09-28)
+
+- **Tiers sized for the first week.** A long run crosses every tier of every track at once. Size
+  the top tier to a great run times ten; make open-ended tracks geometric.
+- **A per-track cap is not a budget.** Two per track over seventeen tracks is thirty cards. Budget
+  the run.
+- **The menu that is hidden only in the HTML.** Every screen that plays a sequence must hide its
+  chrome at the start of every sequence, not once at load.
+- **The counter settles into a hidden menu.** Moving the currency button into the menu while the
+  menu is still hidden makes it vanish mid-sequence. Move it when the menu shows.
+- **A guard longer than the animation.** A 350 ms guard plus a 950 ms flourish made a 1.3 s dead
+  zone on the cards. Guard from when the thing appears, for as long as a stray tap can arrive.
+- **Short screens that hide the line.** A card with no line says nothing. Shrink the line; never
+  hide it.
+- **The hit test that skips ineligible targets.** The tap falls through to a neighbour and nothing
+  explains itself. Answer on the ineligible target.
+- **Lifetime counters that a long run outruns.** A run started under an older script showed sixty
+  cards; the owner blamed the numbers. Both were true: hard-reload after a deploy, and the numbers
+  were too small.
+
 ## Feel
 
 - **A dead first shop.** The pre-wave shop at 60 money with the cheapest item at 150 is a screen

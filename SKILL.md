@@ -181,6 +181,61 @@ Flag anything under 2 of 3. Read the worst first; the numbers with no name (pad 
 amounts, a bank total) and the meta screen's sentences are where it bites. Run it after every copy
 change, and before showing the owner.
 
+## 6b. The third day: the long run and the endgame (2026-09-28)
+
+Once the owner plays runs of thirty waves, every number sized for the first week breaks at once.
+
+- **Size the late tiers to a long run's output.** A 34-wave run shot down 7,700 rockets and 380 by
+  laser; mastery topped out at 5,000 and Gunner at 260, so one run crossed every tier. "This is
+  fucking ridiculous, we need to make the later achievements much harder." Set the top tier to
+  what a great run produces times ten (mastery 20,000, lifetime rockets 100,000, laser kills in
+  one run 700), make Rank past the ladder geometric (each level 12% more than the last, level 30
+  near 50,000 lifetime), and slow the currency-from-kills past a threshold (a piece every 125
+  rockets to 2,000, then every 400).
+- **Budget the level cards, not the tracks.** Two levels per track still let nine citations, eight
+  masteries and Rank show thirty cards. A run hands out four level cards in all, the counters keep,
+  the rest arrive next run. Levels of one track earned together are one card ("Ranks 51–55, five
+  pieces"). The reveal pace scales with count (2.6 s each down to a 0.9 s floor).
+- **Nothing on the result screen leaves the reveals early.** The menu was hidden in the HTML but
+  never re-hidden for the next run, so from the second death on it sat there through the cards.
+  Hide it at the start of every sequence; every result button refuses clicks until the final step.
+  The counter starts blank under the number and moves into the menu only when the menu shows; a
+  frame of the last run's total is "jittery".
+- **The shop says what is coming.** "It affects what I buy." The wave script is deterministic, so
+  the shop header can say it in words: "Wave 5: 10 darts, 7 lobs, 5 zigzags, 3 decoys and a
+  Warhead."
+- **Stuck on the first boss is an economy bug.** "No ordinary player is gonna put up with that."
+  A wave already cleared pays 35% of its first clear (not 20%), doubled near the best; the
+  consolation doubled; the felt node's first ranks cost less. Measure runs-to-rank with the career
+  bot before and after and say the numbers.
+- **The cities heal.** One hit mended every five waves cleared, with a ring and a word; a node
+  priced far out (900, then 2,000) brings it to four, then three. Big sinks want a long tail.
+- **The endgame sink.** "I don't think there's anything left for me to unlock." Once nothing in the
+  grid is locked, offer one thing for a pile of pieces (God mode, 250: one-hit cities, rockets
+  ×1.8 and faster, a boss every third wave, first clears keyed apart and paid double, a switch for
+  the next run). Until it is bought, pieces do not convert to currency. Show it only when
+  everything else is open.
+- **A tap that does nothing must say why.** A base that could not take the picked card was skipped
+  by the hit test, so the tap fell through to its neighbour; the owner read it as broken. Ineligible
+  targets still answer: the card shakes and a word over the base says "Needs 2 drones", "Already
+  fitted", "Warden only".
+- **Show an area effect before the buy.** "I don't know what 'under it' means. We should highlight
+  which drone bases are affected." While carrying the unit, draw its span on the ground and ring
+  every base inside it; its line names the circle.
+- **Copy the owner strikes, verbatim.** "Every death counts" (rewarding death), "a citation's item"
+  (a term never shown), "80 of 80" beside a button for 80 (restating money), "Command laser"
+  (what is it), "The supply roll comes one higher" (what roll), "under it" (where), a "?" after a
+  name (it marked never-bought; read as stray), "Clear wave 35 for a first clear of wave 35"
+  (redundant), "Undo spend" → "Undo", "Spend" → "Shop". Each was one sentence to fix and one
+  sentence the owner had to write. Run the audit first.
+- **One player's reset.** `?reset` in the address wipes that browser's profile and run. A version
+  bump resets everyone; the owner asked for himself.
+- **Mobile is a probe, not a guess.** Drive every touch path with real touch events (card, pad, Go,
+  strike, dispatch, pause) and check state after each. What it found: a tap on a card within 1.3 s
+  of the wave clearing was thrown away by a guard (the dead-tap feel), short screens hid every
+  card's line so a dispatch said only its name, and upright screens squeezed the whole field into
+  393 px (frame the middle 55%). Playwright's tap error names the element that intercepts.
+
 ## 7. Ship and report
 
 Commit on the owner's branch, push, deploy with the repo's command, after every fix, and tell the
