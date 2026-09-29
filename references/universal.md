@@ -206,6 +206,30 @@ where they help a critic. Cite items by number (U12).
   `resize()` that lived at the end of a deleted feature block left every
   canvas black; the error was a `RangeError` far from the cause).
 
+- U67. Winged craft fly like planes: never under half flying speed, a bounded
+  turn rate (0.12 turns a second lumbers, 0.45 darts), circling a goal they
+  cannot stop at. Rotors may hover and reverse; wings may not.
+- U68. Nothing teleports. A ground clamp climbs at a bounded rate and gives
+  back forward travel until the climb fits; a separation is a soft spring to
+  a craft's half-width with a hard push only under 60% of it, so crossing
+  paths drift past instead of jolting.
+- U69. A big effect sweeps. A field-wide blast grows over about two seconds
+  to the view's half-width, with a flash that dies in the first half second, a
+  hot rim and a thin shock ring ahead of it. Same ease-out as a small blast,
+  longer grow, and a radius that stays on screen.
+- U70. A bolt is a jagged line that re-jitters a few times as it fades (a
+  quarter second), colour under a white core, one leg per hop. The sim sends
+  the points; the renderer invents nothing.
+- U71. Units match between sim and render. The sim's sine took turns and the
+  tail drawing used radians, so a zigzag's continuation flattened into a bend
+  the owner called "nonsense" three times. Check every trig call's unit when
+  the picture continues a simulated path; run a continued path to the edge
+  ("model the rockets as if they extend way off the screen") and dim it, never
+  end it.
+- U72. Upright screens frame the middle of a wide field (55% of the view fills
+  the width) instead of squeezing the whole field into a sliver; play still
+  asks for landscape when the whole field must be visible.
+
 ## I. Trust and hygiene
 
 - U58. Clean console, no broken links, a correct `<title>`, og and canonical

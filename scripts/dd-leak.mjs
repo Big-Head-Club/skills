@@ -1,19 +1,20 @@
-import { chromium } from 'playwright'
-const b = await chromium.launch({ args: ["--use-gl=angle","--use-angle=swiftshader","--enable-unsafe-swiftshader"] })
-const page = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage()
-await page.goto('http://localhost:5240'); await page.waitForTimeout(1000)
-const n = await page.evaluate(() => {
-  window.__noAutoPause = true; __game.startRun(false)
-  const s = () => __game.run.s
-  for (let w = 0; w < 6; w++) {
-    let k = 0; while (s().phase === "wave" && k++ < 900) { s().cities.forEach(c => { if (c.alive && c.hp < 2) c.hp = 2 }); __game.fast(20) }
-    if (w === 5) break
-    const f = s().pads.filter(p => p.launcher == null && Math.abs(p.x) <= s().view/2); if (s().offer?.stage === "launcher") __game.input({ k: "launch", i: 0, pad: f[0].id })
-    const o = s().offer; if (o) { const i = o.upgrades.findIndex(u => ["cooldown","radius","charge","flak"].includes(u)); __game.input(i >= 0 ? { k: "upgrade", i, target: "strike" } : { k: "upgrade", i: 0, target: s().launchers[0].id }) }
-  }
-  __game.advance(3, 30)
-  return s().report.leaks.length
+// leak lines in a breather after a wave with lobs and zigzags, cities kept alive so leaks are recorded
+import { chromium } from "playwright"
+const out = process.argv[2]
+const browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] })
+const page = await browser.newPage({ viewport: { width: 1280, height: 720 } })
+page.on("pageerror", (e) => console.log("PAGEERROR", e.message))
+await page.goto("http://localhost:5240/", { waitUntil: "networkidle" })
+await page.evaluate(() => { window.__noAutoPause = true })
+await page.click("#tPlay"); await page.waitForTimeout(400)
+const info = await page.evaluate(() => {
+  const g = window.__game; const s = g.run.s; g.flush()
+  // no defence at all: every rocket leaks; play to the breather after wave 5
+  s.launchers.length = 0; s.drones.length = 0; s.pads.forEach((p) => (p.launcher = null))
+  for (let i = 0; i < 6 && s.wave < 5; i++) { s.cities.forEach((c) => (c.hp = 999)); g.fast(60 * 45); g.flush(); if (s.phase === "breather" && s.wave < 5) { if (s.offer?.stage === "omen") { g.input({ k: "omen", i: 0 }); g.flush() } g.input({ k: "done" }); g.flush() } }
+  return { wave: s.wave, phase: s.phase, leaks: s.report.leaks.map((l) => l.type + (l.arc ? "*" : "")).join(","), lob: s.report.leaks.filter((l) => l.type === "lob").slice(0, 1).map((l) => ({ first: l.path.slice(0, 8).map((v) => Math.round(v)), n: l.path.length / 2, arc: l.arc?.map((v) => Math.round(v * 100) / 100) })) }
 })
-await page.screenshot({ path: '/tmp/ddv/leak.png' })
-console.log(n)
-await b.close()
+console.log(JSON.stringify(info))
+await page.waitForTimeout(1200)
+await page.screenshot({ path: `${out}/leaks.png` })
+await browser.close()

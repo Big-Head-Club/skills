@@ -47,7 +47,7 @@ rules, numbers, pricing, data or copy the owner wrote.
 Read these as you reach them:
 - `references/standards.md`: both standards as checkable criteria, the floor
   they share, and the 1–5 rubric.
-- `references/universal.md`: the polish list that applies to every app (U1–U60).
+- `references/universal.md`: the polish list that applies to every app (U1–U72).
 - `references/buckets.md`: extra tasks, juice level and outside bars by app type.
 - `references/critics.md`: critic briefs, lenses, output format, builder rules.
 - `references/juice-kit.md`: glowdrop's sound, easing, shake and reward recipes.
@@ -244,6 +244,22 @@ every round:
 - **Chrome the owner did not ask for goes when they say so.** Share, Video and
   Credits went in one line ("also get rid of share and video and credits").
   Ask once, early, whether export and credit screens earn their place.
+- **A craft moves the way it looks.** A plane-shaped drone that stopped and
+  reversed like a quadcopter drew loops on itself: "that shape of craft moves
+  like a plane". Winged craft hold speed and turn at a bounded rate (U67).
+  A big one is drawn thin: thick lines at double size fused into a blob.
+- **Nothing snaps.** A ground clamp that teleported a drone up a slope, a hard
+  shove that jolted two crossing drones every tick, a nuke ring that covered
+  the screen in half a second: each read as broken. Bound the rate (a climb of
+  35 units a second, a spring before a push, a two-second sweep) and the same
+  rule looks designed (U68, U69).
+- **Show the effect before the buy.** Picking "Spread out" plays the reach
+  ring and the drones ease apart; carrying an Eye over a pad rings every base
+  inside its span. "I should see the range increase animation as in the case
+  of the longer reach powerup."
+- **Cryptic marks get a key, not a label.** Pad badges "5 −2" scored lowest in
+  the legibility audit. A small dim key in the bottom corner, shown only while
+  a badge has something to explain, was the owner's own ask.
 
 ## 5. Rounds
 

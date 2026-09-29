@@ -14,9 +14,11 @@ for (const [name, vp] of [["desk", { width: 1280, height: 720 }], ["phone", { wi
     const st = await page.evaluate(() => { const g = window.__game; const s = g.run?.s; if (!s || s.phase === "over") return "over"; g.flush(); if (s.phase === "breather") { if (s.offer?.stage === "omen") { g.input({ k: "omen", i: 0 }); g.flush() } if (s.wave >= 7) { s.cities.forEach((c) => { c.alive = false; c.hp = 0 }); g.fast(2); g.flush(); return "over" } g.autoShop() } g.fast(60 * 45); g.flush(); return s.phase + "/" + s.wave })
     if (st === "over") break
   }
-  await page.waitForTimeout(1700)
+  await page.waitForTimeout(2300)
   await page.screenshot({ path: `${out}/end-${name}-1.png` })
-  await page.waitForTimeout(1600)
+  await page.waitForTimeout(2500)
+  await page.screenshot({ path: `${out}/end-${name}-1b.png` })
+  await page.waitForTimeout(4500)
   await page.screenshot({ path: `${out}/end-${name}-2.png` })
   await page.mouse.click(vp.width / 2, vp.height * 0.8); await page.waitForTimeout(500)
   await page.screenshot({ path: `${out}/end-${name}-3.png` })

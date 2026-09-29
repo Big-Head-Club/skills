@@ -1,0 +1,12 @@
+import { chromium } from "playwright"
+const browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] })
+const page = await browser.newPage({ viewport: { width: 1280, height: 720 } })
+await page.goto("http://localhost:5240/", { waitUntil: "networkidle" })
+await page.evaluate(() => { window.__noAutoPause = true; const p = window.__game.profile; p.deaths = 6; p.best = 6; p.unlocked.push("prewave", "omens", "fate", "kite", "hangar", "shop2x2", "rate", "reroll", "warden", "tierU", "shot"); window.__game.saveProfile() })
+await page.click("#tPlay"); await page.waitForTimeout(500)
+await page.evaluate(() => { const g = window.__game; const s = g.run.s; g.flush(); s.money = 99999; s.offer.items = [{ kind: "upgrade", id: "reach", price: 10, tier: "c" }]; s.offer.bought = []; g.offer() })
+await page.waitForTimeout(600)
+await page.click("#cards button:nth-child(1)"); await page.waitForTimeout(400)
+const r = await page.evaluate(() => { const g = window.__game; const s = g.run.s; const L = s.launchers[0]; const q = g.toScreen(L.x, L.y); const ui = g.ui; return { picked: !!document.querySelector("#cards .picked"), upgrading: ui.upgrading, strikeUp: ui.strikeUp, canTake: ui.canTake ? ui.canTake(L) : null, hit: g.launcherAt(q.x, q.y, false)?.id, Lid: L.id, q, type: L.type, ups: L.ups } })
+console.log(JSON.stringify(r))
+await browser.close()
