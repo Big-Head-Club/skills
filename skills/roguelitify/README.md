@@ -12,17 +12,23 @@ worked example in `example/`.
 
 ## Install
 
+Requires Git and Node.js 22.20 or later. Install from the shared
+[Big Head Club skills repository](https://github.com/Big-Head-Club/skills):
+
 ```bash
-git clone git@github.com:Big-Head-Club/roguelitify.git ~/.claude/skills/roguelitify
+npx skills add Big-Head-Club/skills --skill roguelitify --agent claude-code --global
 ```
 
 Restart Claude Code (or start a new session) so it picks the skill up. The review step uses the
 Codex CLI if it is installed, and the Workflow tool for the gauntlet.
 
+If you installed by cloning the old standalone repository, move that clone outside your agent's
+skills directory before installing from this collection, preserving any local edits.
+
 ## Update
 
 ```bash
-git -C ~/.claude/skills/roguelitify pull
+npx skills update roguelitify --global
 ```
 
 ## What's in it
@@ -37,3 +43,6 @@ git -C ~/.claude/skills/roguelitify pull
 - `references/reviews.md`: the review prompts and the gauntlet.
 - `example/`: `meta.js` (the pure meta module), `careers.mjs` (the career bot), `tests.mjs`,
   `spec.md`, `gauntlet.js`.
+
+The examples come from Drone Command and depend on its simulator, game hooks, local paths,
+and review tooling. Adapt those dependencies to the target game before running them.

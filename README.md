@@ -32,6 +32,12 @@ npx skills add Big-Head-Club/skills --skill game-presentation --agent opencode -
 Replace `opencode` with `claude-code` or `codex` to target those agents. Omit
 `--global` for a project-local install.
 
+To install `glowdropify` and `roguelitify` globally for Claude Code:
+
+```sh
+npx skills add Big-Head-Club/skills --skill glowdropify --skill roguelitify --agent claude-code --global
+```
+
 To browse the available skills without installing:
 
 ```sh
@@ -43,6 +49,8 @@ npx skills add Big-Head-Club/skills --list
 | Skill | What it does |
 | --- | --- |
 | [game-presentation](skills/game-presentation/SKILL.md) | Makes games look like authored games rather than conventional websites or dashboards. Covers composition, a shared art vocabulary, asset sourcing and preprocessing, materials, rendering, and visual feedback. |
+| [glowdropify](skills/glowdropify/SKILL.md) | Runs an app polish gauntlet: reduces visual clutter, adds richer rendering and feedback, and compares revisions with reference games through independent critics. Includes capture scripts and reference images. |
+| [roguelitify](skills/roguelitify/SKILL.md) | Adds roguelite progression to a game with runs: persistent profiles, currency, unlocks, luck, and between-round choices, calibrated with bots and adversarial reviews. Includes a worked Drone Command example. |
 
 `game-presentation` connects visual direction to the asset pipeline and the
 renderer. It covers when to reuse artwork, kitbash parts, simplify detail,
@@ -52,6 +60,12 @@ DOM, SVG, Canvas, and GPU-rendered scenes.
 The skill refers to `game-design`, `game-art-assets`, and `image-art-direction`
 for adjacent design and asset-production work. Those companion skills are not
 bundled in this repository.
+
+`glowdropify` and `roguelitify` were written for Claude Code. See their
+[glowdropify setup](skills/glowdropify/README.md) and
+[roguelitify setup](skills/roguelitify/README.md) for required tools and
+project-specific examples. Both were imported from their standalone Big Head
+Club repositories with their full Git histories and supporting files.
 
 ## Use
 
@@ -65,11 +79,12 @@ In OpenCode, you can also mention `@game-presentation` directly.
 ## Update
 
 ```sh
-npx skills update game-presentation
+npx skills update
 ```
 
 The CLI prompts for the installation scope. Use `--global` or `--project` to
-choose it explicitly.
+choose it explicitly. Pass a skill name to update only that skill, for example
+`npx skills update game-presentation`.
 
 ## Add a skill
 
