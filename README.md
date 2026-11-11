@@ -48,8 +48,9 @@ npx skills add Big-Head-Club/skills --list
 
 | Skill | What it does |
 | --- | --- |
-| [game-audio](skills/game-audio/SKILL.md) | Produces and integrates sound effects, music, and ambience. Covers source selection, fal generation, editing, loops, transitions, playback budgets, and listening through the actual game audio system. |
-| [game-presentation](skills/game-presentation/SKILL.md) | Makes games look like authored games rather than conventional websites or dashboards. Covers composition, a shared art vocabulary, asset sourcing and preprocessing, materials, rendering, and visual feedback. |
+| [game-audio](skills/game-audio/SKILL.md) | Produces and integrates sound effects, music, and ambience. Covers source selection, fal generation, editing, loops, transitions, playback budgets, overlapping mute states, and listening through the actual game audio system. |
+| [game-presentation](skills/game-presentation/SKILL.md) | Makes games look like authored games rather than conventional websites or dashboards. Covers composition, a shared art vocabulary, asset preparation including generated 3D, materials, rendering, and visual feedback. |
+| [game-telemetry](skills/game-telemetry/SKILL.md) | Connects progression and performance telemetry to a validated problem, a narrow change, and remeasurement. Covers event contracts, coverage, denominators, release comparisons, and Playgama analytics. |
 | [glowdropify](skills/glowdropify/SKILL.md) | Runs an app polish gauntlet: reduces visual clutter, adds richer rendering and feedback, and compares revisions with reference games through independent critics. Includes capture scripts and reference images. |
 | [roguelitify](skills/roguelitify/SKILL.md) | Adds roguelite progression to a game with runs: persistent profiles, currency, unlocks, luck, and between-round choices, calibrated with bots and adversarial reviews. Includes a worked Drone Command example. |
 
@@ -64,6 +65,13 @@ prepare masks, bake stable shading, and retain runtime control. It works with
 DOM, SVG, Canvas, and GPU-rendered scenes. Its
 [relightable-assets reference](skills/game-presentation/references/relightable-assets.md)
 covers registered state families, controlled image repairs, and material data.
+The [generated-3D reference](skills/game-presentation/references/generated-3d-assets.md)
+covers neutral poses, preserved masters, segmentation, pivots, and runtime checks.
+
+`game-telemetry` connects actual-player evidence to the next development action.
+Its core workflow is provider-neutral; the
+[Playgama reference](skills/game-telemetry/references/playgama.md) covers Bridge
+instrumentation, performance samples, MCP query capabilities, and evidence limits.
 
 The skills refer to `game-design`, `game-art-assets`, and `image-art-direction`
 for adjacent design and asset-production work. Those companion skills are not
@@ -84,6 +92,10 @@ Ask your agent to use the installed skill:
 
 > Use game-audio to prepare this weapon and pickup set for repeated play. Check
 > the sources, then audition ordinary and dense gameplay through the real mix.
+
+> Use game-telemetry to investigate where players stop progressing. Check the
+> event definitions and coverage before proposing a change, and distinguish
+> observed outcomes from hypotheses about their causes.
 
 In OpenCode, you can also mention `@game-presentation` directly.
 

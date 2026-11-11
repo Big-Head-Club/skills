@@ -6,8 +6,9 @@ description: >
   improving game audio, using fal for sounds or soundtracks, preparing one-shots
   or seamless loops, designing adaptive music and transitions, mixing repeated
   events, or fixing delayed, fatiguing, overlapping, or overpowering cues. Covers
-  source selection, editing, layering, loudness, playback budgets, lifecycle
-  behavior, and listening through the actual game audio system.
+  source selection, editing, layering, loudness, playback budgets, overlapping
+  mute states, platform audio constraints, and listening through the actual game
+  audio system.
 ---
 
 # Game Audio
@@ -49,6 +50,10 @@ resolution. Giving both the same loudness and long tail erases that hierarchy.
 
 ## 2. Choose the source by the control required
 
+Check the destination's current audio-source and export requirements before
+choosing a production method. Keep those constraints alongside the listening
+brief; a suitable sound can still be unsuitable for its publishing destination.
+
 | Requirement | Useful starting point |
 | --- | --- |
 | An existing sound already fits | Reuse it and adjust only the demonstrated mismatch |
@@ -60,6 +65,15 @@ resolution. Giving both the same loudness and long tail erases that hierarchy.
 
 Retain source provenance and applicable usage terms. Preserve accepted source
 files so another processing pass does not require another generation.
+
+For Playgama, read the current
+[sound requirements](https://wiki.playgama.com/playgama/game-requirements/user-experience-requirements.md#3.3-sound)
+and [sound guide](https://wiki.playgama.com/playgama/guides/game-development/sound.md).
+As checked on 2026-11-11, requirement 3.3.2 calls for recorded or audio-tool-produced
+sound shipped as compressed OGG/MP3 files and rejects sound synthesized in code,
+including procedural Web Audio tones. This is a destination policy, not a general
+judgment about synthesis quality. Do not assume exporting code-generated tones
+as a compressed file changes their eligibility.
 
 For generated one-shots, describe one event with an onset, body, and decay.
 Specify dry sound, immediate onset, or exclusions when the playback situation
@@ -141,11 +155,24 @@ Choose controls for the observed accumulation:
 - Apply ducking only when the event hierarchy benefits from it; a compressor
   cannot decide which sounds matter.
 
-Keep music and effects independently controllable under the shared mute policy.
+Keep music and effects independently adjustable under one controller that derives
+audibility from all applicable reasons for silence: user mute, platform mute,
+platform pause, an open ad, and a hidden page. Each producer changes only its own
+reason; clearing one reason cannot clear another. Derive the effective output
+from those reasons and the saved volume settings rather than letting callbacks
+independently restore the master gain.
+
+Read initial platform audio state before playback, then subscribe to changes;
+an event listener alone misses a game loaded while the platform is already muted.
+For Playgama this initial value is `platform.isAudioEnabled`. Initialize the other
+relevant reasons from their current state as well. Browser audio unlock or context
+resume does not override the mute policy.
+
 Exercise pause, backgrounding, resume, scene changes, and teardown through the
-engine's documented lifecycle. Avoid duplicate music starts and repeated asset
-decodes. If the project uses loading fallbacks, verify their levels and budgets
-too; bound retries through its existing loading policy.
+engine's documented lifecycle. Apply the destination's gameplay-pause rules
+alongside silence during ads and platform pauses. Avoid duplicate music starts
+and repeated asset decodes. If the project uses loading fallbacks, verify their
+levels and budgets too; bound retries through its existing loading policy.
 
 ## 6. Verify playback and listening separately
 
@@ -159,6 +186,12 @@ Review the scenarios affected by the change:
 - Ordinary gameplay and a dense scene with music, pickups, impacts, and warnings.
 - Music boundaries, transitions, and interruptions.
 - Volume, mute, pause, resume, and missing assets where applicable.
+
+Test overlapping silence reasons in both clearing orders. Closing an ad while
+user mute remains active, returning to a visible tab while the platform remains
+paused, and unmuting while an ad is open must all remain silent. After the final
+reason clears, restore the intended volume without a duplicate music start.
+Also start and reload with the platform muted to check initialization.
 
 Record whether event schedules were observed in play or constructed as stress
 inputs. Use the same schedule and controls for before/after measurements. When
@@ -182,8 +215,8 @@ provenance, reproducible edits, exported file, event route, relevant playback
 limits, audition, and separate technical/listening results. Retain rejection
 reasons so later work does not revive a failed candidate as an accepted asset.
 
-For a quiet puzzle, a few synthesized cues and one restrained confirmation may
-complete the brief. A dense action game may need edited samples and strict
-repetition budgets. An exploration game may need long spatial textures and
-careful loop transitions. Let the listening situation choose the production
-method and the amount of machinery.
+Where the destination permits synthesis, a quiet puzzle may need only a few
+synthesized cues and one restrained confirmation. A dense action game may need
+edited samples and strict repetition budgets. An exploration game may need long
+spatial textures and careful loop transitions. Let the listening situation choose
+the production method and the amount of machinery.

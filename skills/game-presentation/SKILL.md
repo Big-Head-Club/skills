@@ -6,9 +6,9 @@ description: >
   screens, boards, HUDs, menus, inventories, rewards, visual effects, or their
   asset/rendering pipeline; especially for requests to make something more
   game-like, less web-like, visually cohesive, or production-ready. Covers
-  composition, art vocabulary, asset sourcing and preprocessing, materials,
-  rendering, and visual state changes. Complements game-design and
-  game-art-assets.
+  composition, art vocabulary, asset sourcing and preprocessing, generated-3D
+  preparation, materials, rendering, and visual state changes. Complements
+  game-design and game-art-assets.
 ---
 
 # Game Presentation
@@ -124,6 +124,11 @@ recoloring, or runtime lighting, read
 [Registered, relightable assets](references/relightable-assets.md). It covers
 reference roles, shared framing, controlled repairs, channel processing, and
 separate technical and visual acceptance.
+
+For generated 3D models that need movable parts, usable pivots, or texture and
+material cleanup, read [Generated 3D assets](references/generated-3d-assets.md).
+It covers neutral source poses, preserved masters, segmentation correspondence,
+and validation in the actual renderer.
 
 ## 5. Preprocess for presentation, selectively
 
@@ -244,6 +249,15 @@ Check:
 6. Motion: effects explain events without obscuring persistent state; reduced
    motion preserves meaning.
 7. Runtime: representative activity meets the project's performance target.
+
+Use evidence suited to each claim. Screenshots and video establish appearance
+and visual readability; state inspection and input-driven checks establish
+behavior; real-time profiling on target hardware establishes runtime performance.
+Record whether footage used wall-clock play or fixed simulation steps captured
+one frame at a time. Offline capture can look smooth even when each frame takes
+too long to render interactively, so its playback FPS is not a runtime benchmark.
+Use game-telemetry when the question concerns actual-player progression or
+performance distributions rather than the captured slice alone.
 
 Do not remove labels or theme-specific artwork to decide whether a game looks
 like a game. Those may be essential parts of its visual language.
