@@ -48,16 +48,24 @@ npx skills add Big-Head-Club/skills --list
 
 | Skill | What it does |
 | --- | --- |
+| [game-audio](skills/game-audio/SKILL.md) | Produces and integrates sound effects, music, and ambience. Covers source selection, fal generation, editing, loops, transitions, playback budgets, and listening through the actual game audio system. |
 | [game-presentation](skills/game-presentation/SKILL.md) | Makes games look like authored games rather than conventional websites or dashboards. Covers composition, a shared art vocabulary, asset sourcing and preprocessing, materials, rendering, and visual feedback. |
 | [glowdropify](skills/glowdropify/SKILL.md) | Runs an app polish gauntlet: reduces visual clutter, adds richer rendering and feedback, and compares revisions with reference games through independent critics. Includes capture scripts and reference images. |
 | [roguelitify](skills/roguelitify/SKILL.md) | Adds roguelite progression to a game with runs: persistent profiles, currency, unlocks, luck, and between-round choices, calibrated with bots and adversarial reviews. Includes a worked Drone Command example. |
 
+`game-audio` connects sound production to playback. It works with generated,
+synthesized, composed, recorded, and existing assets, and includes a
+[fal production reference](skills/game-audio/references/fal-production.md) with
+source-to-asset examples, request recovery, and runtime mixing evidence.
+
 `game-presentation` connects visual direction to the asset pipeline and the
 renderer. It covers when to reuse artwork, kitbash parts, simplify detail,
 prepare masks, bake stable shading, and retain runtime control. It works with
-DOM, SVG, Canvas, and GPU-rendered scenes.
+DOM, SVG, Canvas, and GPU-rendered scenes. Its
+[relightable-assets reference](skills/game-presentation/references/relightable-assets.md)
+covers registered state families, controlled image repairs, and material data.
 
-The skill refers to `game-design`, `game-art-assets`, and `image-art-direction`
+The skills refer to `game-design`, `game-art-assets`, and `image-art-direction`
 for adjacent design and asset-production work. Those companion skills are not
 bundled in this repository.
 
@@ -73,6 +81,9 @@ Ask your agent to use the installed skill:
 
 > Use game-presentation to make this game's board, HUD, and menus feel like one
 > coherent game. Inspect the current assets and renderer before changing them.
+
+> Use game-audio to prepare this weapon and pickup set for repeated play. Check
+> the sources, then audition ordinary and dense gameplay through the real mix.
 
 In OpenCode, you can also mention `@game-presentation` directly.
 

@@ -119,6 +119,12 @@ Before transforming an asset family, establish its consumer contract:
 
 Inspect the source against this contract. Unchanged reuse is a valid outcome.
 
+For generated or illustrated state families that need stable pivots, attachments,
+recoloring, or runtime lighting, read
+[Registered, relightable assets](references/relightable-assets.md). It covers
+reference roles, shared framing, controlled repairs, channel processing, and
+separate technical and visual acceptance.
+
 ## 5. Preprocess for presentation, selectively
 
 Preprocessing is an art-direction tool, not just file optimization. Apply only
