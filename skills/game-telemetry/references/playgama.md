@@ -54,6 +54,51 @@ contract it uses the existing custom-event API until Bridge exposes its system
 events API. Check current support before selecting the transport, preserve the
 event name and data contract, and never write the same sample to both namespaces.
 
+### Additional incident diagnostics
+
+When brief stalls need investigation, send `performance_drop` through the same
+adapter as an additional custom event. This is a game-defined extension; guide
+1.1.2 specifies `performance_sample` and does not prescribe an incident contract.
+Keep the canonical samples and their cadence.
+
+A 60-FPS game can use this example, as implemented in Rebel Survivors:
+
+- Average FPS below 45 over at least one second of active, visible gameplay, or
+  one measured frame lasting at least 250 ms.
+- At most one report per ten wall-clock seconds, with the cooldown scoped to each
+  run entry. Document that re-entering a saved run starts a new cooldown scope.
+- Reset the short measurement window and frame baseline across pause, upgrade
+  selection, background time, and other excluded intervals.
+
+These are game-specific detector settings. Choose thresholds against the game's
+target and investigate representative stalls before adopting them elsewhere.
+
+Keep payloads flat. Include a bounded reason, `target_fps`, `window_ms`,
+`frame_count`, `fps_avg`, and `frame_time_max_ms`, plus `build_version` and any
+existing `game_version`. Add only useful, correctly measured context: simulation
+time or tick, progression step, enemy/projectile counts, renderer backend,
+viewport or framebuffer dimensions, and device-pixel ratio. Define additional
+field names and units in the game's event record; they are not Bridge fields.
+
+The build ID belongs to the artifact and also changes for UI or rendering-only
+releases. Preserve a simulation fingerprint's existing meaning when sending
+both versions. First-action events and onboarding timing use the attempt scope
+and active-time rules in the core skill, within the existing Bridge session.
+
+## Verify delivery in the published runtime
+
+Record logic-test evidence, exported-browser request evidence, and live-service
+evidence separately. Intercepting `analytics.send` or returning success from a
+mocked network request establishes wiring, not Playgama ingestion. A hosted bundle
+containing the expected build ID establishes which code is served, not delivery.
+
+For ingestion evidence, inspect the expected event and its build identity through
+the analytics views once their freshness covers the check. Report whether those
+views distinguish the tested release; a mixed aggregate may not identify the
+individual request. Preserve the exact tested artifact/build ID and any remaining
+verification gap in the release notes. Follow the guide's recheck cadence rather
+than polling a just-published build for immediate aggregates.
+
 ## Query in response to a question
 
 Use a game ID obtained from `list_applications`. Begin with a bounded date range
